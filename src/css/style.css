@@ -44,54 +44,51 @@ body {
   color: var(--text-color);
 }
 
-/* notes container*/
+/* CSS Grid implementation for notes container */
 #notes-container {
   padding: 20px;
-  width: 1000px;
+  width: 85%;
+  max-width: 1700px;
   margin: 0 auto;
-  column-gap: 16px;
-  column-width: 250px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  transition: all 0.3s ease;
 }
 
 note-card {
-  display: inline-block;
-  margin-bottom: 16px;
-  break-inside: avoid; 
+  width: 100%;
+  display: block;
 }
 
-/* Responsif untuk layar kecil */
+/* Responsive grid adjustments */
 @media (min-width: 1750px) {
   #notes-container {
-    width: 1700px;
-    column-count: 5;
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
-@media (max-width: 1749px) {
+@media (max-width: 1749px) and (min-width: 1361px) {
   #notes-container {
-    width: 1350px;
-    column-count: 4;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 1360px) {
+@media (max-width: 1360px) and (min-width: 1041px) {
   #notes-container {
-    width: 1000px;
-    column-count: 3;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 1040px) {
+@media (max-width: 1040px) and (min-width: 716px) {
   #notes-container {
-    width: 660px;
-    column-count: 2;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 715px) {
   #notes-container {
-    width: 85%;
-    column-count: 1;
+    grid-template-columns: 1fr;
   }
 }
 
