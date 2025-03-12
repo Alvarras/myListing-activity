@@ -2,8 +2,11 @@
 class NoteCard extends HTMLElement {
     constructor() {
       super()
+  
+      // Create shadow DOM
       const shadow = this.attachShadow({ mode: "open" })
   
+      // Create template
       const template = document.createElement("template")
       template.innerHTML = `
               <div class="note-card">
@@ -15,6 +18,7 @@ class NoteCard extends HTMLElement {
               </div>
           `
   
+      // Create styles
       const style = document.createElement("style")
       style.textContent = `
               .note-card {
@@ -23,10 +27,11 @@ class NoteCard extends HTMLElement {
                   border: 2px solid var(--border-color, #3a3a3a);
                   background-color: var(--card-color, #1e1e1e);
                   border-radius: 10px;
-                  width: 277px;
+                  width: 100%;
                   height: fit-content;
                   min-height: 105px;
                   padding: 20px;
+                  box-sizing: border-box;
                   box-shadow: var(--card-shadow, 0 2px 8px rgba(0, 0, 0, 0.3));
                   transition: transform 0.3s ease, box-shadow 0.3s ease, 
                               background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
@@ -65,27 +70,26 @@ class NoteCard extends HTMLElement {
               :host-context(.light-theme) .note-date {
                   color: var(--date-color, rgb(120, 120, 120));
               }
-  
-              @media (max-width: 715px) {
-                  .note-card {
-                      width: 100%;
-                  }
-              }
           `
   
+      // Add template and styles to shadow DOM
       shadow.appendChild(style)
       shadow.appendChild(template.content.cloneNode(true))
     }
   
+    // When element is connected to DOM
     connectedCallback() {
+      // Get elements
       const titleElement = this.shadowRoot.querySelector(".note-title")
       const bodyElement = this.shadowRoot.querySelector(".note-body")
       const dateElement = this.shadowRoot.querySelector(".note-date")
   
+      // Get attribute values
       const title = this.getAttribute("title") || "No Title"
       const body = this.getAttribute("body") || "No Content"
       const createdAt = this.getAttribute("created-at") || new Date().toISOString()
   
+      // Format date
       const date = new Date(createdAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -94,13 +98,13 @@ class NoteCard extends HTMLElement {
         minute: "2-digit",
       })
   
+      // Set content
       titleElement.textContent = title
       bodyElement.innerHTML = body 
       dateElement.textContent = `Created on: ${date}`
     }
 }
-  
-// Register custom element
+
 customElements.define("note-card", NoteCard)
   
   
