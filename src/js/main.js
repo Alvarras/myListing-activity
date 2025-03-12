@@ -10,14 +10,13 @@ window.renderNotes = () => {
 
   container.innerHTML = ""
 
-  // Check if notesData exists and has items
   if (!window.notesData || window.notesData.length === 0) {
     console.warn("No notes data available!")
-    container.innerHTML = '<p style="color: white; text-align: center;">No notes available.</p>'
+    container.innerHTML =
+      '<p style="color: var(--text-color); text-align: center; grid-column: 1 / -1;">No notes available.</p>'
     return
   }
 
-  // Create note cards for each note
   window.notesData.forEach((note) => {
     if (!note.archived) {
       const noteCard = document.createElement("note-card")
@@ -37,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.notesData = []
   }
 
+  // Render the notes
   window.renderNotes()
 })
 
