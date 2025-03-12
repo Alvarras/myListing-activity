@@ -1,6 +1,6 @@
 # Notes App Application
 
-A simple notes application built with vanilla JavaScript using Web Components.
+A simple notes application 
 
 ## Project Structure
 
